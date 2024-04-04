@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+	<resultMap id="MemberResult" type="com.example.demo.model.Member">
+		<result column="member_id" property="id" />
+		<result column="password" property="password" />
+		<result column="nickname" property="nickname" />
+		<result column="age" property="age" />
+	</resultMap>
+	
+    <select id="findAll" resultMap="MemberResult">
+        SELECT * FROM member
+    </select>
+    
+    <select id="findById" parameterType="String" resultMap="MemberResult">
+		SELECT * FROM member WHERE member_id = #{id}
+	</select>
+	
+	<insert id="save" parameterType="com.example.demo.model.Member" keyProperty="id">
+		INSERT INTO member (member_id, password, nickname, age)
+		VALUES (#{id}, #{password}, #{nickname}, #{age})
+	</insert>
+	
+	<update id="update" parameterType="com.example.demo.model.Member">
+		UPDATE member SET password = #{password}, nickname = #{nickname}, age = #{age}
+		WHERE member_id = #{id}
+	</update>
+	
+	<delete id="deleteById">
+		DELETE FROM member WHERE member_id = #{id}
+	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM member
+	</delete>
+</mapper>
