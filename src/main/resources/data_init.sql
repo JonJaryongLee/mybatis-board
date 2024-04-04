@@ -15,17 +15,6 @@ CREATE TABLE article (
     FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE
 );
 
-CREATE TABLE comment (
-    comment_id IDENTITY PRIMARY KEY,
-    content TEXT NOT NULL,
-    created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL,
-    member_id VARCHAR(50),
-    article_id INT,
-    FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE,
-    FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
-);
-
 INSERT INTO member (member_id, password, nickname, age)
 VALUES
 ('jony123', 'jonyjony1212', '조니', 40),
@@ -37,9 +26,3 @@ VALUES
 ('안녕 얘들아!', '나는 새로 온 전학생 조니야', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'jony123'),
 ('수학책 빌려줄사람?', '다음 시간 수학인데 깜빡하고 책 안가져옴 ㅠㅠ', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'sylvie456'),
 ('실비야 사실 널 좋아해!', 'ㅈㄱㄴ', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'nana777');
-
-INSERT INTO comment (content, created_at, updated_at, member_id, article_id)
-VALUES
-('반가워 조니!', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'sylvie456', 1),
-('조니 안녕? 나는 나나야.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'nana777', 1),
-('이게 머선129...', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'sylvie456', 3);

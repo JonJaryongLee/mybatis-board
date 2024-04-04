@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -63,7 +64,7 @@ class MemberMapperTest {
 		memberMapper.save(member1);
 		
 		// when
-		Member foundMember = memberMapper.findById(member1.getId());
+		Member foundMember = memberMapper.findById(member1.getId()).get();
 		
 		// then
 		Assertions.assertThat(foundMember.getId()).isEqualTo("jony123");
@@ -77,10 +78,10 @@ class MemberMapperTest {
 		// given
 		
 		// when
-		Member foundMember = memberMapper.findById("invalidid");
+		Optional<Member> foundMember = memberMapper.findById("invalidid");
 		
 		// then
-		Assertions.assertThat(foundMember).isEqualTo(null);
+		Assertions.assertThat(foundMember).isEqualTo(Optional.empty());
 	}
 
 	@Test
@@ -89,7 +90,7 @@ class MemberMapperTest {
 		
 		// when
 		Long isSuccess = memberMapper.save(member1);
-		Member foundMember = memberMapper.findById(member1.getId());
+		Member foundMember = memberMapper.findById(member1.getId()).get();
 		
 		// then
 		Assertions.assertThat(isSuccess).isEqualTo(1L);
@@ -125,7 +126,7 @@ class MemberMapperTest {
 		
 		// when
 		Long isSuccess = memberMapper.update(member1);
-		Member foundMember = memberMapper.findById(member1.getId());
+		Member foundMember = memberMapper.findById(member1.getId()).get();
 		
 		// then
 		Assertions.assertThat(isSuccess).isEqualTo(1L);
@@ -155,11 +156,11 @@ class MemberMapperTest {
 		
 		// when
 		Long isSuccess = memberMapper.deleteById(member1.getId());
-		Member foundMember = memberMapper.findById(member1.getId());
+		Optional<Member> foundMember = memberMapper.findById(member1.getId());
 		
 		// then
 		Assertions.assertThat(isSuccess).isEqualTo(1L);
-		Assertions.assertThat(foundMember).isEqualTo(null);
+		Assertions.assertThat(foundMember).isEqualTo(Optional.empty());
 	}
 	
 	@Test
@@ -178,16 +179,16 @@ class MemberMapperTest {
 		// given
 		memberMapper.save(member1);
 		memberMapper.save(member2);
-		List<Member> members1 = memberMapper.findAll();
+		List<Member> foundMembers1 = memberMapper.findAll();
 		
 		// when
 		Long affectedRows = memberMapper.deleteAll();
-		List<Member> members2 = memberMapper.findAll();
+		List<Member> foundMembers2 = memberMapper.findAll();
 		
 		// then
-		Assertions.assertThat(members1.size()).isEqualTo(2L);
+		Assertions.assertThat(foundMembers1.size()).isEqualTo(2L);
 		Assertions.assertThat(affectedRows).isEqualTo(2L);
-		Assertions.assertThat(members2.size()).isEqualTo(0L);
+		Assertions.assertThat(foundMembers2.size()).isEqualTo(0L);
 	}
 
 }

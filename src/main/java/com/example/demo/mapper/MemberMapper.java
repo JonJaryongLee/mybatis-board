@@ -1,9 +1,11 @@
 package com.example.demo.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.dao.DuplicateKeyException;
 
 import com.example.demo.model.Member;
 
@@ -21,9 +23,9 @@ public interface MemberMapper {
 	 * 아이디에 해당하는 회원을 조회합니다.
 	 * 
 	 * @param id String 타입의 회원 아이디
-	 * @return 성공 시 member 객체, 실패 시 null
+	 * @return 성공 시 Optional 리턴
 	 */
-	Member findById(@Param("id") String id);
+	Optional<Member> findById(@Param("id") String id);
 	
 	/**
 	 * 회원을 저장합니다.
@@ -45,8 +47,8 @@ public interface MemberMapper {
 	/**
 	 * 아이디에 해당하는 회원을 삭제합니다.
 	 * 
-	 * @param id
-	 * @return 삭제에 성공하면 1L, 실패하면 0L 을 반환합니다.
+	 * @param id 회원 아이디
+	 * @return 성공했을 경우 1L, 실패했을 경우 0L
 	 */
 	Long deleteById(@Param("id") String id);
 	
