@@ -6,14 +6,11 @@
 <mapper namespace="com.example.demo.mapper.MemberMapper">
 	<resultMap id="MemberListResult" type="com.example.demo.model.Member">
 		<result column="member_id" property="id" />
-		<result column="password" property="password" />
 		<result column="nickname" property="nickname" />
-		<result column="age" property="age" />
 	</resultMap>
 	
 	<resultMap id="MemberDetailResult" type="com.example.demo.model.Member">
 		<result column="member_id" property="id" />
-		<result column="password" property="password" />
 		<result column="nickname" property="nickname" />
 		<result column="age" property="age" />
 	</resultMap>
@@ -23,7 +20,7 @@
     </select>
     
     <select id="findById" parameterType="String" resultMap="MemberDetailResult">
-		SELECT * FROM member WHERE member_id = #{id}
+		SELECT member_id, nickname, age FROM member WHERE member_id = #{id}
 	</select>
 	
 	<insert id="save" parameterType="com.example.demo.model.Member" keyProperty="id">
