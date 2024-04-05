@@ -1,11 +1,11 @@
 package com.example.demo.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,7 +55,7 @@ class MemberMapperTest {
 		List<Member> foundMembers = memberMapper.findAll();
 
 		// then
-		Assertions.assertThat(foundMembers.size()).isEqualTo(2L);
+		assertThat(foundMembers.size()).isEqualTo(2L);
 	}
 
 	@Test
@@ -67,10 +67,10 @@ class MemberMapperTest {
 		Member foundMember = memberMapper.findById(member1.getId()).get();
 		
 		// then
-		Assertions.assertThat(foundMember.getId()).isEqualTo("jony123");
-		Assertions.assertThat(foundMember.getPassword()).isEqualTo(member1.getPassword());
-		Assertions.assertThat(foundMember.getNickname()).isEqualTo(member1.getNickname());
-		Assertions.assertThat(foundMember.getAge()).isEqualTo(member1.getAge());
+		assertThat(foundMember.getId()).isEqualTo("jony123");
+		assertThat(foundMember.getPassword()).isEqualTo(member1.getPassword());
+		assertThat(foundMember.getNickname()).isEqualTo(member1.getNickname());
+		assertThat(foundMember.getAge()).isEqualTo(member1.getAge());
 	}
 	
 	@Test
@@ -81,7 +81,7 @@ class MemberMapperTest {
 		Optional<Member> foundMember = memberMapper.findById("invalidid");
 		
 		// then
-		Assertions.assertThat(foundMember).isEqualTo(Optional.empty());
+		assertThat(foundMember).isEqualTo(Optional.empty());
 	}
 
 	@Test
@@ -93,11 +93,11 @@ class MemberMapperTest {
 		Member foundMember = memberMapper.findById(member1.getId()).get();
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(1L);
-		Assertions.assertThat(foundMember.getId()).isEqualTo(member1.getId());
-		Assertions.assertThat(foundMember.getPassword()).isEqualTo(member1.getPassword());
-		Assertions.assertThat(foundMember.getNickname()).isEqualTo(member1.getNickname());
-		Assertions.assertThat(foundMember.getAge()).isEqualTo(member1.getAge());
+		assertThat(isSuccess).isEqualTo(1L);
+		assertThat(foundMember.getId()).isEqualTo(member1.getId());
+		assertThat(foundMember.getPassword()).isEqualTo(member1.getPassword());
+		assertThat(foundMember.getNickname()).isEqualTo(member1.getNickname());
+		assertThat(foundMember.getAge()).isEqualTo(member1.getAge());
 	}
 	
 	@Test
@@ -115,7 +115,7 @@ class MemberMapperTest {
 				() -> memberMapper.save(member3));
 		
 		// then
-		Assertions.assertThat(e.getClass().getName()).isEqualTo("org.springframework.dao.DuplicateKeyException");
+		assertThat(e.getClass().getName()).isEqualTo("org.springframework.dao.DuplicateKeyException");
 	}
 
 	@Test
@@ -129,11 +129,11 @@ class MemberMapperTest {
 		Member foundMember = memberMapper.findById(member1.getId()).get();
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(1L);
-		Assertions.assertThat(foundMember.getId()).isEqualTo(member1.getId());
-		Assertions.assertThat(foundMember.getPassword()).isEqualTo(member1.getPassword());
-		Assertions.assertThat(foundMember.getNickname()).isEqualTo(member1.getNickname());
-		Assertions.assertThat(foundMember.getAge()).isEqualTo(member1.getAge());
+		assertThat(isSuccess).isEqualTo(1L);
+		assertThat(foundMember.getId()).isEqualTo(member1.getId());
+		assertThat(foundMember.getPassword()).isEqualTo(member1.getPassword());
+		assertThat(foundMember.getNickname()).isEqualTo(member1.getNickname());
+		assertThat(foundMember.getAge()).isEqualTo(member1.getAge());
 	}
 	
 	@Test
@@ -146,7 +146,7 @@ class MemberMapperTest {
 		Long isSuccess = memberMapper.update(invalidMember);
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(0L);
+		assertThat(isSuccess).isEqualTo(0L);
 	}
 
 	@Test
@@ -159,8 +159,8 @@ class MemberMapperTest {
 		Optional<Member> foundMember = memberMapper.findById(member1.getId());
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(1L);
-		Assertions.assertThat(foundMember).isEqualTo(Optional.empty());
+		assertThat(isSuccess).isEqualTo(1L);
+		assertThat(foundMember).isEqualTo(Optional.empty());
 	}
 	
 	@Test
@@ -171,7 +171,7 @@ class MemberMapperTest {
 		Long isSuccess = memberMapper.deleteById("invalidId");
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(0L);
+		assertThat(isSuccess).isEqualTo(0L);
 	}
 	
 	@Test
@@ -186,9 +186,8 @@ class MemberMapperTest {
 		List<Member> foundMembers2 = memberMapper.findAll();
 		
 		// then
-		Assertions.assertThat(foundMembers1.size()).isEqualTo(2L);
-		Assertions.assertThat(affectedRows).isEqualTo(2L);
-		Assertions.assertThat(foundMembers2.size()).isEqualTo(0L);
+		assertThat(foundMembers1.size()).isEqualTo(2L);
+		assertThat(affectedRows).isEqualTo(2L);
+		assertThat(foundMembers2.size()).isEqualTo(0L);
 	}
-
 }

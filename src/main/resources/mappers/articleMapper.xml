@@ -4,7 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.mapper.ArticleMapper">
-	<resultMap id="ArticleResult" type="com.example.demo.model.Article">
+	<resultMap id="ArticleListResult" type="com.example.demo.model.Article">
+		<result column="article_id" property="id" />
+		<result column="title" property="title" />
+		<result column="member_id" property="memberId" />
+	</resultMap>
+	
+	<resultMap id="ArticleDetailResult" type="com.example.demo.model.Article">
 		<result column="article_id" property="id" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
@@ -13,16 +19,16 @@
 		<result column="member_id" property="memberId" />
 	</resultMap>
 	
-    <select id="findAll" resultMap="ArticleResult">
-        SELECT * FROM article;
+    <select id="findAll" resultMap="ArticleListResult">
+        SELECT article_id, title, content FROM article;
     </select>
     
-    <select id="findById" parameterType="Long" resultMap="ArticleResult">
+    <select id="findById" parameterType="Long" resultMap="ArticleDetailResult">
 		SELECT * FROM article WHERE article_id = #{id}
 	</select>
 	
-	<select id="findByMemberId" parameterType="String" resultMap="ArticleResult">
-		SELECT * FROM article WHERE member_id = #{memberId}
+	<select id="findByMemberId" parameterType="String" resultMap="ArticleListResult">
+		SELECT article_id, title, content FROM article WHERE member_id = #{memberId}
 	</select>
 	
 	<insert

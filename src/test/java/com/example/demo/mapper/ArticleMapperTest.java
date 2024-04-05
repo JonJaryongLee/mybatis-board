@@ -1,10 +1,11 @@
 package com.example.demo.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,7 +66,7 @@ class ArticleMapperTest {
 		List<Article> foundArticles = articleMapper.findAll();
 		
 		// then
-		Assertions.assertThat(foundArticles.size()).isEqualTo(2L);
+		assertThat(foundArticles.size()).isEqualTo(2L);
 	}
 
 	@Test
@@ -77,18 +78,18 @@ class ArticleMapperTest {
 		Article foundArticle = articleMapper.findById(article1.getId()).get();
 		
 		// then
-		Assertions.assertThat(foundArticle.getId()).isEqualTo(article1.getId());
-		Assertions.assertThat(foundArticle.getTitle()).isEqualTo(article1.getTitle());
-		Assertions.assertThat(foundArticle.getContent()).isEqualTo(article1.getContent());
-		Assertions.assertThat(foundArticle.getMemberId()).isEqualTo(article1.getMemberId());
+		assertThat(foundArticle.getId()).isEqualTo(article1.getId());
+		assertThat(foundArticle.getTitle()).isEqualTo(article1.getTitle());
+		assertThat(foundArticle.getContent()).isEqualTo(article1.getContent());
+		assertThat(foundArticle.getMemberId()).isEqualTo(article1.getMemberId());
 		
 		int foundArticleCreatedAtNano = foundArticle.getCreatedAt().getNano() / 1000000;
 		int foundArticleUpdatedAtNano = foundArticle.getUpdatedAt().getNano() / 1000000;
 		int article1CreatedAtNano = article1.getCreatedAt().getNano() / 1000000;
 		int article1UpdatedAtNano = article1.getUpdatedAt().getNano() / 1000000;
 		
-		Assertions.assertThat(foundArticleCreatedAtNano).isEqualTo(article1CreatedAtNano);
-		Assertions.assertThat(foundArticleUpdatedAtNano).isEqualTo(article1UpdatedAtNano);
+		assertThat(foundArticleCreatedAtNano).isEqualTo(article1CreatedAtNano);
+		assertThat(foundArticleUpdatedAtNano).isEqualTo(article1UpdatedAtNano);
 	}
 	
 	@Test
@@ -99,7 +100,7 @@ class ArticleMapperTest {
 		Optional<Article> foundArticle = articleMapper.findById(99L);
 		
 		// then
-		Assertions.assertThat(foundArticle).isEqualTo(Optional.empty());
+		assertThat(foundArticle).isEqualTo(Optional.empty());
 	}
 
 	@Test
@@ -112,7 +113,7 @@ class ArticleMapperTest {
 		List<Article> foundArticles = articleMapper.findByMemberId(member.getId());
 		
 		// then
-		Assertions.assertThat(foundArticles.size()).isEqualTo(2L);
+		assertThat(foundArticles.size()).isEqualTo(2L);
 	}
 	
 	@Test
@@ -123,7 +124,7 @@ class ArticleMapperTest {
 		List<Article> foundArticles = articleMapper.findByMemberId(member.getId());
 		
 		// then
-		Assertions.assertThat(foundArticles.size()).isEqualTo(0L);
+		assertThat(foundArticles.size()).isEqualTo(0L);
 	}
 
 	@Test
@@ -135,19 +136,19 @@ class ArticleMapperTest {
 		Article foundArticle = articleMapper.findById(article1.getId()).get();
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(1L);
-		Assertions.assertThat(foundArticle.getId()).isEqualTo(article1.getId());
-		Assertions.assertThat(foundArticle.getTitle()).isEqualTo(article1.getTitle());
-		Assertions.assertThat(foundArticle.getContent()).isEqualTo(article1.getContent());
-		Assertions.assertThat(foundArticle.getMemberId()).isEqualTo(article1.getMemberId());
+		assertThat(isSuccess).isEqualTo(1L);
+		assertThat(foundArticle.getId()).isEqualTo(article1.getId());
+		assertThat(foundArticle.getTitle()).isEqualTo(article1.getTitle());
+		assertThat(foundArticle.getContent()).isEqualTo(article1.getContent());
+		assertThat(foundArticle.getMemberId()).isEqualTo(article1.getMemberId());
 		
 		int foundArticleCreatedAtNano = foundArticle.getCreatedAt().getNano() / 1000000;
 		int foundArticleUpdatedAtNano = foundArticle.getUpdatedAt().getNano() / 1000000;
 		int article1CreatedAtNano = article1.getCreatedAt().getNano() / 1000000;
 		int article1UpdatedAtNano = article1.getUpdatedAt().getNano() / 1000000;
 		
-		Assertions.assertThat(foundArticleCreatedAtNano).isEqualTo(article1CreatedAtNano);
-		Assertions.assertThat(foundArticleUpdatedAtNano).isEqualTo(article1UpdatedAtNano);
+		assertThat(foundArticleCreatedAtNano).isEqualTo(article1CreatedAtNano);
+		assertThat(foundArticleUpdatedAtNano).isEqualTo(article1UpdatedAtNano);
 	}
 
 	@Test
@@ -161,19 +162,19 @@ class ArticleMapperTest {
 		Article foundArticle = articleMapper.findById(article1.getId()).get();
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(1L);
-		Assertions.assertThat(foundArticle.getId()).isEqualTo(article1.getId());
-		Assertions.assertThat(foundArticle.getTitle()).isEqualTo(article1.getTitle());
-		Assertions.assertThat(foundArticle.getContent()).isEqualTo(article1.getContent());
-		Assertions.assertThat(foundArticle.getMemberId()).isEqualTo(article1.getMemberId());
+		assertThat(isSuccess).isEqualTo(1L);
+		assertThat(foundArticle.getId()).isEqualTo(article1.getId());
+		assertThat(foundArticle.getTitle()).isEqualTo(article1.getTitle());
+		assertThat(foundArticle.getContent()).isEqualTo(article1.getContent());
+		assertThat(foundArticle.getMemberId()).isEqualTo(article1.getMemberId());
 		
 		int foundArticleCreatedAtNano = foundArticle.getCreatedAt().getNano() / 1000000;
 		int foundArticleUpdatedAtNano = foundArticle.getUpdatedAt().getNano() / 1000000;
 		int article1CreatedAtNano = article1.getCreatedAt().getNano() / 1000000;
 		int article1UpdatedAtNano = article1.getUpdatedAt().getNano() / 1000000;
 		
-		Assertions.assertThat(foundArticleCreatedAtNano).isEqualTo(article1CreatedAtNano);
-		Assertions.assertThat(foundArticleUpdatedAtNano).isEqualTo(article1UpdatedAtNano);
+		assertThat(foundArticleCreatedAtNano).isEqualTo(article1CreatedAtNano);
+		assertThat(foundArticleUpdatedAtNano).isEqualTo(article1UpdatedAtNano);
 	}
 	
 	@Test
@@ -184,7 +185,7 @@ class ArticleMapperTest {
 		Long isSuccess = articleMapper.update(article1);
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(0L);
+		assertThat(isSuccess).isEqualTo(0L);
 	}
 
 	@Test
@@ -197,8 +198,8 @@ class ArticleMapperTest {
 		Optional<Article> foundArticle = articleMapper.findById(article1.getId());
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(1L);
-		Assertions.assertThat(foundArticle).isEqualTo(Optional.empty());
+		assertThat(isSuccess).isEqualTo(1L);
+		assertThat(foundArticle).isEqualTo(Optional.empty());
 	}
 	
 	@Test
@@ -209,7 +210,7 @@ class ArticleMapperTest {
 		Long isSuccess = articleMapper.deleteById(99L);
 		
 		// then
-		Assertions.assertThat(isSuccess).isEqualTo(0L);
+		assertThat(isSuccess).isEqualTo(0L);
 	}
 
 	@Test
@@ -224,9 +225,9 @@ class ArticleMapperTest {
 		List<Article> foundArticles2 = articleMapper.findAll();
 		
 		// then
-		Assertions.assertThat(foundArticles1.size()).isEqualTo(2L);
-		Assertions.assertThat(affectedRows).isEqualTo(2L);
-		Assertions.assertThat(foundArticles2.size()).isEqualTo(0L);
+		assertThat(foundArticles1.size()).isEqualTo(2L);
+		assertThat(affectedRows).isEqualTo(2L);
+		assertThat(foundArticles2.size()).isEqualTo(0L);
 	}
 
 }

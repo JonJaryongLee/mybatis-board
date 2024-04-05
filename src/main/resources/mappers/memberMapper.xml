@@ -4,18 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.mapper.MemberMapper">
-	<resultMap id="MemberResult" type="com.example.demo.model.Member">
+	<resultMap id="MemberListResult" type="com.example.demo.model.Member">
 		<result column="member_id" property="id" />
 		<result column="password" property="password" />
 		<result column="nickname" property="nickname" />
 		<result column="age" property="age" />
 	</resultMap>
 	
-    <select id="findAll" resultMap="MemberResult">
-        SELECT * FROM member
+	<resultMap id="MemberDetailResult" type="com.example.demo.model.Member">
+		<result column="member_id" property="id" />
+		<result column="password" property="password" />
+		<result column="nickname" property="nickname" />
+		<result column="age" property="age" />
+	</resultMap>
+	
+    <select id="findAll" resultMap="MemberListResult">
+        SELECT member_id, nickname FROM member
     </select>
     
-    <select id="findById" parameterType="String" resultMap="MemberResult">
+    <select id="findById" parameterType="String" resultMap="MemberDetailResult">
 		SELECT * FROM member WHERE member_id = #{id}
 	</select>
 	
