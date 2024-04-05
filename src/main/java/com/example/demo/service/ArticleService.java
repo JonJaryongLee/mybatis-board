@@ -83,6 +83,7 @@ public class ArticleService {
 	 * @param title 게시글 제목
 	 * @param content 게시글 내용
 	 * @return 생성된 게시글 아이디
+	 * @throws NoSuchElementException 아이디에 해당하는 게시글이 존재하지 않을 경우 예외를 발생시킵니다.
 	 * @throws IllegalStateException 서버 내부의 문제로 게시글 수정에 실패할 경우, 예외를 발생시킵니다.
 	 */
 	@Transactional
