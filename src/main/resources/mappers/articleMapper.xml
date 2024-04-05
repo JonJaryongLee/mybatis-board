@@ -20,7 +20,7 @@
 	</resultMap>
 	
     <select id="findAll" resultMap="ArticleListResult">
-        SELECT article_id, title, content FROM article;
+        SELECT article_id, title, member_id FROM article;
     </select>
     
     <select id="findById" parameterType="Long" resultMap="ArticleDetailResult">
@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="findByMemberId" parameterType="String" resultMap="ArticleListResult">
-		SELECT article_id, title, content FROM article WHERE member_id = #{memberId}
+		SELECT article_id, title, member_id FROM article WHERE member_id = #{memberId}
 	</select>
 	
 	<insert

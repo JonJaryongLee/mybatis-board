@@ -1,5 +1,11 @@
 package com.example.demo.controller.response;
 
-public class CreateArticleResponse {
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
+public class CreateArticleResponse {
+	
+	private Long articleId;
 }

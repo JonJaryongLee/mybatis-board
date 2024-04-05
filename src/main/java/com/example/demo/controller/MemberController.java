@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.controller.request.CreateMemberRequest;
 import com.example.demo.controller.request.UpdateMemberRequest;
+import com.example.demo.controller.response.ArticleListDto;
 import com.example.demo.controller.response.CreateMemberResponse;
 import com.example.demo.controller.response.DeleteMemberResponse;
 import com.example.demo.controller.response.MemberDetailDto;
 import com.example.demo.controller.response.MemberListDto;
 import com.example.demo.controller.response.UpdateMemberResponse;
 import com.example.demo.model.Member;
+import com.example.demo.service.ArticleService;
 import com.example.demo.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final MemberService memberService;
+	private final ArticleService articleService;
 	
 	@GetMapping
 	public List<MemberListDto> list() {
@@ -47,6 +50,16 @@ public class MemberController {
 				foundMember.getId(),
 				foundMember.getNickname(),
 				foundMember.getAge());
+	}
+	
+	@GetMapping("/{memberId}/articles")
+	public List<ArticleListDto> listByMemberId(@PathVariable(name = "memberId") String memberId) {
+		return articleService.findArticleByMemberId(memberId).stream()
+				.map(a -> new ArticleListDto(
+						a.getId(),
+						a.getTitle(),
+						a.getMemberId()
+				)).collect(Collectors.toList());
 	}
 	
 	@PostMapping
